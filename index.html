@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html ng-app="meuApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Gerenciador de Tarefas</title>
+</head>
+<body ng-controller="MainController as main">
+
+  <!-- Header fixo -->
+  <header-componente></header-componente>
+
+  <!-- Aqui é onde mudamos de "página" -->
+  <div ng-include="main.paginaAtual"></div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+  <script src="app.js"></script>
+
+  <!-- Componentes -->
+  <script src="components/header/header.component.js"></script>
+  <script src="components/tarefas/tarefas.component.js"></script>
+  <script src="components/categoria/categoria.component.js"></script>
+</body>
+</html>

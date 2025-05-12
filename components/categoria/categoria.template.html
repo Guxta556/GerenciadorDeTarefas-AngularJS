@@ -1,0 +1,20 @@
+<div class="categorias">
+    <h2>Gerenciar Categorias</h2>
+  
+    <form ng-submit="$ctrl.adicionarCategoria()">
+      <label>Nova Categoria:</label>
+      <input type="text" ng-model="$ctrl.novaCategoria" required />
+      <button type="submit">Adicionar</button>
+    </form>
+  
+    <hr />
+  
+    <h3>Categorias Existentes:</h3>
+    <ul>
+      <li ng-repeat="cat in $ctrl.categorias track by $index">
+        {{cat}}
+        <button ng-click="$ctrl.excluirCategoria($index)">Excluir</button>
+      </li>
+    </ul>
+  </div>
+  

@@ -1,0 +1,24 @@
+{
+  "name": "desafio2-angular",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Guxta556/GerenciadorDeTarefas-AngularJS.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Guxta556/GerenciadorDeTarefas-AngularJS/issues"
+  },
+  "homepage": "https://github.com/Guxta556/GerenciadorDeTarefas-AngularJS#readme",
+  "dependencies": {
+    "angular": "^1.5.8",
+    "express": "^5.1.0"
+  },
+  "description": ""
+}
