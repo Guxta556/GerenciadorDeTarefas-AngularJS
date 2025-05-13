@@ -1,6 +1,176 @@
 <div class="header">
-    <button ng-click="$ctrl.irPara('tarefas')">Tarefas</button>
-    <button ng-click="$ctrl.irPara('categoria')">Categorias</button>
-    <button ng-click="$ctrl.irPara('relatorio')">Relatório</button>
+  <div id="Logo">
+    <img src="../../assets/img/logo.png" id="img">
   </div>
-  
+  <h1 class="titulo-header">Gestão de Tarefas</h1>
+  <div class="areaSeletor">
+    <button class="btn" ng-click="$ctrl.irPara('tarefas')">Tarefas</button>
+    <button class="btn" ng-click="$ctrl.irPara('categoria')">Categorias</button>
+    <button class="btn" ng-click="$ctrl.irPara('relatorio')">Relatório</button>
+  </div>
+</div>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Titan+One&display=swap');
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(90deg, #1E3A8A, #3B82F6);
+  padding: 10px 30px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  color: white;
+  flex-wrap: wrap;
+  transition: all 0.3s ease;
+}
+
+#Logo {
+  width: 100px;
+  height: 100px;
+  min-width: 100px;
+  border-radius: 50%;
+  background-color: white;
+  padding: 5px;
+  border: 3px solid #FCD34D;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; 
+  transition: all 0.3s ease;
+}
+
+img {
+  height: 120%;
+  width: auto;
+  object-fit: contain;
+  border: none;
+}
+
+.titulo-header {
+  font-family: 'Titan One', cursive;
+  font-size: 32px;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+  border-bottom: 3px solid #FCD34D;
+  padding-bottom: 4px;
+  margin: 0 20px;
+  flex: 1;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.areaSeletor {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.btn {
+  background-color: #FCD34D; 
+  color: #1E3A8A;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Alfa Slab One', cursive;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.btn:hover {
+  background-color: #fbbf24;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+@media (max-width: 700px) {
+  .header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px 10px;
+    justify-content: center;
+  }
+
+  #Logo {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 10px;
+  }
+
+  .titulo-header {
+    font-size: 24px;
+    margin: 10px 0;
+    border: none;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+  }
+
+  .areaSeletor {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .btn {
+    flex: 1 1 30%;
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+}
+
+@media (max-width: 400px) {
+  .header {
+    padding: 10px 8px;
+    gap: 8px;
+  }
+
+  #Logo {
+    width: 60px;
+    height: 60px;
+    padding: 3px;
+    border-width: 2px;
+  }
+
+  .titulo-header {
+    font-size: 18px;
+    letter-spacing: 0.5px;
+    margin: 5px 0;
+    padding-bottom: 0;
+    text-shadow: none;
+    border: none;
+  }
+
+  .areaSeletor {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 6px;
+    display: flex;
+    flex-wrap: nowrap;
+  }
+
+  .btn {
+    width: 90%;
+    font-size: 13px;
+    padding: 8px;
+    border-radius: 8px;
+    box-shadow: none;
+  }
+}
+</style>

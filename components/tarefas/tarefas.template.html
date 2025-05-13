@@ -1,134 +1,352 @@
 <div class="tarefas">
-    <h2>Cadastro de Tarefas</h2>
+  <h2>Cadastro de Tarefas</h2>
 
-    <form ng-submit="$ctrl.salvarTarefa()">
+  <form ng-submit="$ctrl.salvarTarefa()" class="form-tarefa">
     <label>Nome Tarefa:</label>
     <input type="text" ng-model="$ctrl.tarefa.nome" required />
 
     <label>Categoria</label>
     <select ng-model="$ctrl.tarefa.categoria" required>
-        <option value="" disabled selected>Selecione a categoria</option>
-        <option ng-repeat="cat in $ctrl.categorias" value="{{cat}}">
-          {{cat}}
-        </option>
+      <option value="" disabled selected>Selecione a categoria</option>
+      <option ng-repeat="cat in $ctrl.categorias" value="{{cat}}">
+        {{cat}}
+      </option>
     </select>
 
     <label>Prazo:</label>
     <input type="date" ng-model="$ctrl.tarefa.prazo" required />
     <button type="submit">Adicionar Tarefa</button>
-    </form>
+  </form>
 
-    <hr />
+  <hr />
 
-    <h3>Minhas Tarefas:</h3>
-    <ul>
-    <li ng-repeat="t in $ctrl.tarefas track by $index">
-        <strong>{{t.nome}}</strong> - {{t.categoria}} - {{t.prazo | date:'dd/MM/yyyy'}}
-
-        <br />
-        Status:
+  <h3>Minhas Tarefas:</h3>
+  <div class="tarefas-galeria">
+    <div class="tarefa-card" ng-repeat="t in $ctrl.tarefas track by $index">
+      <div class="card-t">
+        <strong id="nome">{{t.nome}}</strong>
+        <p><strong>Categoria:</strong> <span id="categoria">{{t.categoria}}</span></p>
+        <p><strong>Prazo:</strong> <span id="prazo">{{t.prazo | date:'dd/MM/yyyy'}}</span></p>
+      </div>
+      <div class="card-footer">
         <label class="switch">
-          <input type="checkbox" ng-model="status" ng-change="ctrl.alternarStatus">
+          <input type="checkbox" ng-model="t.status" ng-change="$ctrl.alternarStatus(t)">
           <span class="slider"></span>
+          
         </label>
-        <span>{{ status ? 'Concluída' : 'Pendente' }}</span>
-        
-        
-        <br />
-        <button ng-click="$ctrl.abrirModalEdicao($index)">Editar</button>
-        <button ng-click="$ctrl.excluirTarefa($index)">Excluir</button>
-        <hr />
-    </li>
-    </ul>
+        <span ng-class="t.status ? 'concluida' : 'pendente'">
+          {{ t.status ? 'Concluída' : 'Pendente' }}
+        </span>
 
-    <div class="modal" ng-show="$ctrl.modalAberto">
-        <div class="modal-conteudo">
-          <h3>Editar Tarefa</h3>
-      
-          <form ng-submit="$ctrl.salvarEdicao()">
-            <label>Nome Tarefa:</label>
-            <input type="text" ng-model="$ctrl.tarefaEditando.nome" required />
-      
-            <label>Categoria:</label>
-            <select ng-model="$ctrl.tarefaEditando.categoria" required>
-              <option value="" disabled>Selecione a categoria</option>
-              <option ng-repeat="cat in $ctrl.categorias" value="{{cat}}">
-                {{cat}}
-              </option>
-            </select>
-      
-            <label>Prazo:</label>
-            <input type="date" ng-model="$ctrl.tarefaEditando.prazo" required />
-      
-            <br /><br />
-            <button type="submit">Salvar</button>
-            <button type="button" ng-click="$ctrl.fecharModal()">Cancelar</button>
-          </form>
+        <div class="actions">
+          <button ng-click="$ctrl.abrirModalEdicao($index)">Editar</button>
+          <button ng-click="$ctrl.excluirTarefa($index)">Excluir</button>
         </div>
-    </div>      
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" ng-show="$ctrl.modalAberto">
+    <div class="modal-conteudo">
+      <h3>Editar Tarefa</h3>
+
+      <form ng-submit="$ctrl.salvarEdicao()">
+        <label>Nome Tarefa:</label>
+        <input type="text" ng-model="$ctrl.tarefaEditando.nome" required />
+
+        <label>Categoria:</label>
+        <select ng-model="$ctrl.tarefaEditando.categoria" required>
+          <option value="" disabled>Selecione a categoria</option>
+          <option ng-repeat="cat in $ctrl.categorias" value="{{cat}}">
+            {{cat}}
+          </option>
+        </select>
+
+        <label>Prazo:</label>
+        <input type="date" ng-model="$ctrl.tarefaEditando.prazo" required />
+
+        <br /><br />
+        <button type="submit">Salvar</button>
+        <button type="button" ng-click="$ctrl.fecharModal()">Cancelar</button>
+      </form>
+    </div>
+  </div>
 </div>
 
 <style>
-.modal {
+  .tarefas {
+    padding: 30px;
+    background: #ffffff;
+    max-width: 900px;
+    margin: 40px auto;
+    border-radius: 20px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    font-family: 'Alfa Slab One', cursive;
+    color: #1E3A8A;
+    transition: all 0.3s ease;
+  }
+
+  .tarefas h2 {
+    font-family: 'Titan One', cursive;
+    font-size: 28px;
+    color: #1E3A8A;
+    text-align: center;
+    border-bottom: 2px solid #FCD34D;
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+  }
+
+  .form-tarefa {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-family: sans-serif;
+  }
+
+  .form-tarefa label {
+    font-weight: bold;
+    color: #1D4ED8;
+  }
+
+  .form-tarefa input,
+  .form-tarefa select,
+  .form-tarefa button {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #3B82F6;
+    border-radius: 8px;
+    outline: none;
+  }
+
+  .form-tarefa button {
+    background-color: #FCD34D;
+    color: #1E3A8A;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .form-tarefa button:hover {
+    background-color: #fbbf24;
+    transform: scale(1.05);
+  }
+
+  .tarefas-galeria {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+  }
+
+  .tarefa-card {
+    background-color: #EFF6FF;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease;
+  }
+
+  .tarefa-card:hover {
+    transform: scale(1.05);
+  }
+
+  .card-t {
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+
+  .card-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+  }
+
+  .actions button {
+    font-size: 14px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    background-color: #FCD34D;
+    color: #1E3A8A;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+  }
+
+  .actions button:hover {
+    background-color: #fbbf24;
+    transform: scale(1.05);
+  }
+
+  .modal {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0, 0, 0, 0.6);
     display: flex;
     justify-content: center;
     align-items: center;
-}
+    z-index: 999;
+  }
 
-.modal-conteudo {
+  .modal-conteudo {
     background: white;
     padding: 20px;
     border-radius: 8px;
     width: 400px;
-}
+    max-width: 100%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    animation: slideIn 0.3s ease-out;
+  }
 
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 50px;
-  height: 24px;
-}
+  @keyframes slideIn {
+    0% {
+      transform: scale(0.8);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
 
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
+  .modal-conteudo label {
+    font-weight: bold;
+    color: #1D4ED8;
+  }
 
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0; left: 0;
-  right: 0; bottom: 0;
-  background-color: #ccc;
-  transition: .4s;
-  border-radius: 24px;
-}
+  .modal-conteudo input,
+  .modal-conteudo select {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #3B82F6;
+    border-radius: 8px;
+    outline: none;
+  }
 
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 18px;
-  width: 18px;
-  left: 3px;
-  bottom: 3px;
-  background-color: white;
-  transition: .4s;
-  border-radius: 50%;
-}
+  .modal-conteudo button {
+    padding: 10px;
+    font-size: 16px;
+    background-color: #FCD34D;
+    color: #1E3A8A;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-block: 5px;
+  }
 
-.switch input:checked + .slider {
-  background-color: #4caf50;
-}
+  .modal-conteudo button:hover {
+    background-color: #fbbf24;
+    transform: scale(1.05);
+  }
 
-.switch input:checked + .slider:before {
-  transform: translateX(26px);
-}
+  form {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+
+  @media (max-width: 650px) {
+    .tarefas-galeria {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 450px) {
+    .tarefas-galeria {
+      grid-template-columns: 1fr;
+    }
+
+    .tarefa-card {
+      padding: 15px;
+    }
+
+    .form-tarefa {
+      gap: 8px;
+    }
+
+    .form-tarefa input,
+    .form-tarefa select,
+    .form-tarefa button {
+      font-size: 14px;
+    }
+  }
+  
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+  }
+
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0;
+    right: 0; bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 24px;
+  }
+
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+  }
+
+  .switch input:checked + .slider {
+    background-color: #4caf75;
+  }
+
+  .switch input:checked + .slider:before {
+    transform: translateX(26px);
+  }
+
+  #nome{
+    color: #057eff;
+  }
+
+  #categoria{
+    color: #057eff;
+  }
+
+  #prazo {
+    color: #057eff;
+  }
+
+  .concluida {
+    color: #08ca90; 
+    font-weight: bold;
+  }
+
+  .pendente {
+    color: #d4d22a; 
+    font-weight: bold;
+  } 
 </style>
-    

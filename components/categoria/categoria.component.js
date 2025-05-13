@@ -12,9 +12,9 @@ angular.module('meuApp').component('categoria', {
         var salvas = localStorage.getItem('categorias');
   
         if (salvas) {
-          vm.categorias = JSON.parse(salvas); // ✅ Corrigido: carrega do storage
+          vm.categorias = JSON.parse(salvas); 
         } else {
-          vm.categorias = categoriasPadrao.slice(); // Se vazio, usa padrão
+          vm.categorias = categoriasPadrao.slice(); 
           atualizarStorage();
         }
       };

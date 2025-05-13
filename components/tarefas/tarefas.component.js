@@ -11,7 +11,6 @@ angular.module('meuApp').component('tarefas', {
       vm.modalAberto = false;
 
   
-      // 🟢 Carrega do localStorage ao iniciar o componente
       vm.$onInit = function() {
         var salvas = localStorage.getItem('tarefas');
         vm.carregarCategorias();
@@ -20,8 +19,7 @@ angular.module('meuApp').component('tarefas', {
           vm.tarefas = JSON.parse(salvas);
         }
       };
-  
-      // 🔄 Sempre que atualizar tarefas, salva no localStorage
+
       function atualizarStorage() {
         localStorage.setItem('tarefas', JSON.stringify(vm.tarefas));
       }
@@ -48,12 +46,11 @@ angular.module('meuApp').component('tarefas', {
   
       vm.excluirTarefa = function(index) {
         vm.tarefas.splice(index, 1);
-        atualizarStorage(); // Atualiza localStorage
+        atualizarStorage(); 
       };
   
-      vm.alternarStatus = function(tarefa) {
-        tarefa.status = !tarefa.status;
-        atualizarStorage(); // Salva no localStorage
+      vm.alternarStatus = function(tarefa) {  
+        atualizarStorage(); 
       };
 
       vm.abrirModalEdicao = function(index) {
@@ -70,7 +67,7 @@ angular.module('meuApp').component('tarefas', {
       vm.salvarEdicao = function() {
         vm.tarefas[vm.indexEdicao] = angular.copy(vm.tarefaEditando);
         vm.fecharModal();
-        atualizarStorage(); // Salva no localStorage
+        atualizarStorage(); 
       };
 
       vm.carregarCategorias = function() {
